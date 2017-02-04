@@ -25,16 +25,16 @@ namespace WindowsFormsApplication1
             {
                 ForPanel forPanel = new ForPanel(i + 1, 10 + i * 3);
 
-                forPanel.MouseDown += new MouseEventHandler(this.panel1_MouseDown);
-                forPanel.forLabel.MouseDown += new MouseEventHandler(this.panel1_MouseDown);
-                forPanel.forTextBox.MouseDown += new MouseEventHandler(this.panel1_MouseDown);
+                forPanel.MouseDown += new MouseEventHandler(this.ControlMouseDown);
+                forPanel.forLabel.MouseDown += new MouseEventHandler(this.ControlMouseDown);
+                forPanel.forTextBox.MouseDown += new MouseEventHandler(this.ControlMouseDown);
 
                 this.Controls.Add(forPanel);
             }
 
         }
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        private void ControlMouseDown(object sender, MouseEventArgs e)
         {
             if (sender is Panel)
             {
@@ -52,7 +52,7 @@ namespace WindowsFormsApplication1
             {
                 ForPanel forPanel = new ForPanel(pocet + 1, 10 + pocet * 3);
 
-                forPanel.MouseDown += new MouseEventHandler(this.panel1_MouseDown);
+                forPanel.MouseDown += new MouseEventHandler(this.ControlMouseDown);
 
                 forPanel.Location = this.panel2.PointToClient(new Point(e.X, e.Y));
 

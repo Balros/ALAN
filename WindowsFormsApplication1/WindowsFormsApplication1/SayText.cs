@@ -23,7 +23,6 @@ namespace WindowsFormsApplication1
             forTextBox.Size = new System.Drawing.Size(51, 32);
             forTextBox.TabIndex = tabIndex + 2;
 
-            this
             this.BackColor = System.Drawing.SystemColors.Info;
             this.Controls.Add(forTextBox);
             this.Location = new System.Drawing.Point(63, 33 * panelNumber);
