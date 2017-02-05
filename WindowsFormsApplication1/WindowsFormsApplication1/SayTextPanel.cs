@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    public partial class ForPanel : Panel
+    public partial class SayTextPanel : Panel
     {
         public Label forLabel = new Label();
         public TextBox forTextBox = new TextBox();
 
-        public ForPanel(int panelNumber, int tabIndex)
+        public SayTextPanel(int panelNumber, int tabIndex)
         {
             InitializeComponent();
 
@@ -23,8 +23,8 @@ namespace WindowsFormsApplication1
 
             addLabel(panelNumber, tabIndex);
             addTextBox(panelNumber, tabIndex);
-
         }
+
         private void addTextBox(int panelNumber, int tabIndex)
         {
             setTextBox(panelNumber, tabIndex);
@@ -41,7 +41,7 @@ namespace WindowsFormsApplication1
         {
             this.BackColor = System.Drawing.SystemColors.Info;
             this.Location = new System.Drawing.Point(63, 33 * panelNumber);
-            this.Name = "forText" + panelNumber;
+            this.Name = "SayText" + panelNumber;
             this.Size = new System.Drawing.Size(150, 32);
             this.TabIndex = tabIndex; //toto nastavuje kolkate to bude pomocou Tabu
         }
@@ -61,7 +61,7 @@ namespace WindowsFormsApplication1
             forLabel.Name = "label" + panelNumber;
             forLabel.Size = new System.Drawing.Size(50, 32);
             forLabel.TabIndex = tabIndex + 1;
-            forLabel.Text = "for ";
+            forLabel.Text = "Say Text";
         }
 
         protected override void OnPaint(PaintEventArgs pe)

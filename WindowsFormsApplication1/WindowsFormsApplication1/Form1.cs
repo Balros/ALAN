@@ -21,22 +21,77 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
-                ForPanel forPanel = new ForPanel(i + 1, 10 + i * 3);
+                addForPanelTemplate(i);
+            }
 
-                forPanel.MouseDown += new MouseEventHandler(this.ControlMouseDown);
-                forPanel.forLabel.MouseDown += new MouseEventHandler(this.ControlMouseDown);
-                forPanel.forTextBox.MouseDown += new MouseEventHandler(this.ControlMouseDown);
-
-                this.Controls.Add(forPanel);
+            for (int i = 3; i < 6; i++)
+            {
+                addSayTextPanelTemplate(i);
             }
 
         }
 
+        private void addForPanelTemplate(int i)
+        {
+            ForPanel forPanel = CreateForPanel(i);
+
+            Controls.Add(forPanel);
+        }
+        private void addForPanelToList(int i, Point point)
+        {
+            ForPanel forPanel = CreateForPanel(i);
+
+            forPanel.Location = this.panel2.PointToClient(point);
+
+            panel2.Controls.Add(forPanel);
+        }
+
+        private ForPanel CreateForPanel(int i)
+        {
+            ForPanel forPanel = new ForPanel(i + 1, 10 + i * 3);
+
+            addClickEventForAll(forPanel);
+            return forPanel;
+        }
+
+        private void addSayTextPanelTemplate(int i)
+        {
+            SayTextPanel sayPanel = createSayTextPanel(i);
+
+            Controls.Add(sayPanel);
+        }
+
+        private SayTextPanel createSayTextPanel(int i)
+        {
+            SayTextPanel sayPanel = new SayTextPanel(i + 1, 10 + i * 3);
+
+            addClickEventForAll(sayPanel);
+            return sayPanel;
+        }
+
+        private void addSayTextPanelToList(int pocet, Point point)
+        {
+            SayTextPanel sayPanel = createSayTextPanel(pocet);
+
+            sayPanel.Location = this.panel2.PointToClient(point);
+
+            panel2.Controls.Add(sayPanel);
+        }
+
+        private void addClickEventForAll(Control inputControl)
+        {
+            inputControl.MouseDown += new MouseEventHandler(this.ControlMouseDown);
+
+            foreach (Control control in inputControl.Controls)
+            {
+                control.MouseDown += new MouseEventHandler(this.ControlMouseDown);
+            }
+        }
+
         private void ControlMouseDown(object sender, MouseEventArgs e)
         {
-            
             Panel control = setControl(sender);
             if (control != null)
             {
@@ -65,16 +120,18 @@ namespace WindowsFormsApplication1
             Control c = e.Data.GetData(e.Data.GetFormats()[0]) as Control;
             if (c is ForPanel)
             {
-                ForPanel forPanel = new ForPanel(pocet + 1, 10 + pocet * 3);
+                addForPanelToList(pocet,new Point(e.X,e.Y));
 
-                forPanel.MouseDown += new MouseEventHandler(this.ControlMouseDown);
+                pocet++;
+            }
+            if (c is SayTextPanel)
+            {
+                addSayTextPanelToList(pocet, new Point(e.X, e.Y));
 
-                forPanel.Location = this.panel2.PointToClient(new Point(e.X, e.Y));
-
-                this.panel2.Controls.Add(forPanel);
                 pocet++;
             }
         }
+
 
         private void panel2_DragOver(object sender, DragEventArgs e)
         {

@@ -60,11 +60,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SayText.cs">
+    <Compile Include="SayTextPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="SayText.Designer.cs">
-      <DependentUpon>SayText.cs</DependentUpon>
+    <Compile Include="SayTextPanel.Designer.cs">
+      <DependentUpon>SayTextPanel.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

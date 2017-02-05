@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class SayText
+    partial class SayTextPanel
     {
         /// <summary>
         /// Required designer variable.
