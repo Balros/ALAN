@@ -36,13 +36,28 @@ namespace WindowsFormsApplication1
 
         private void ControlMouseDown(object sender, MouseEventArgs e)
         {
-            if (sender is Panel)
+            
+            Panel control = setControl(sender);
+            if (control != null)
             {
-                var panel = (Panel)sender;
-
-                panel.DoDragDrop(panel, DragDropEffects.Copy);
+                control.DoDragDrop(control, DragDropEffects.Copy);
 
             }
+        }
+
+        private Panel setControl(object sender)
+        {
+            Panel result = null;
+            if (sender is Panel)
+            {
+                result = (Panel)sender;
+            }
+            else if (sender is Control)
+            {
+                result = (Panel)((Control)sender).Parent;
+            }
+
+            return result;
         }
 
         private void panel2_DragDrop(object sender, DragEventArgs e)
