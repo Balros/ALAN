@@ -39,8 +39,8 @@ namespace WindowsFormsApplication1
 
         private void setSettings(int panelNumber, int tabIndex)
         {
-            this.BackColor = System.Drawing.SystemColors.Info;
-            this.Location = new System.Drawing.Point(63, 33 * panelNumber);
+            this.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.Location = new System.Drawing.Point(63,100 + 33 * panelNumber);
             this.Name = "SayText" + panelNumber;
             this.Size = new System.Drawing.Size(150, 32);
             this.TabIndex = tabIndex; //toto nastavuje kolkate to bude pomocou Tabu
@@ -61,7 +61,7 @@ namespace WindowsFormsApplication1
             forLabel.Name = "label" + panelNumber;
             forLabel.Size = new System.Drawing.Size(50, 32);
             forLabel.TabIndex = tabIndex + 1;
-            forLabel.Text = "Say Text";
+            forLabel.Text = "Povedz";
         }
 
         protected override void OnPaint(PaintEventArgs pe)
