@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +58,10 @@
     </Compile>
     <Compile Include="ForPanel.Designer.cs">
       <DependentUpon>ForPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LabelPanel.cs" />
+    <Compile Include="MenuPanel.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

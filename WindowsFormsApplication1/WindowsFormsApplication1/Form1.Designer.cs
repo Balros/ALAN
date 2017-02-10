@@ -40,7 +40,7 @@
             this.panel2.AllowDrop = true;
             this.panel2.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.panel2.Location = new System.Drawing.Point(310, 5);
-            this.panel2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.panel2.Margin = new System.Windows.Forms.Padding(1);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(700, 560);
             this.panel2.TabIndex = 10;
@@ -59,6 +59,7 @@
             this.button1.TabIndex = 11;
             this.button1.Text = "Procedúra";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ControlMouseDown);
             // 
             // button2
@@ -73,6 +74,7 @@
             this.button2.TabIndex = 12;
             this.button2.Text = "Ovládanie";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -100,6 +102,7 @@
             this.button4.TabIndex = 14;
             this.button4.Text = "Premenná";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
@@ -111,7 +114,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel2);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
