@@ -114,6 +114,34 @@ namespace WindowsFormsApplication1
             panel2.Controls.Add(menuPnl);
         }
 
+        private void addLabelPanelTemplate(int i, bool menu, string text, System.Drawing.Color farba)
+        {
+
+            LabelPanel LabelPnl = createLabelPanel(i, text, farba);
+            Controls.Add(LabelPnl);
+            if (menu == true)
+            {
+                ZoznamPrvkovMenu.Add(LabelPnl);
+            }
+        }
+
+        private LabelPanel createLabelPanel(int i, string text, System.Drawing.Color farba)
+        {
+            LabelPanel LabelPnl = new LabelPanel(i + 1, 10 + i * 3, text, farba);
+
+            addClickEventForAll(LabelPnl);
+            return LabelPnl;
+        }
+
+        private void addLabelPanelToList(int pocet, Point point, string text, System.Drawing.Color farba)
+        {
+            LabelPanel LabelPnl = createLabelPanel(pocet, text, farba);
+
+            LabelPnl.Location = this.panel2.PointToClient(point);
+
+            panel2.Controls.Add(LabelPnl);
+        }
+
         private void addClickEventForAll(Control inputControl)
         {
             inputControl.MouseDown += new MouseEventHandler(this.ControlMouseDown);
@@ -125,7 +153,6 @@ namespace WindowsFormsApplication1
         }
 
         private void ControlMouseDown(object sender, MouseEventArgs e)
-
         {
             if (sender is Button) // pridal som sem toto, lebo mi to padlo vzdy ked som klikol na nejaky button
             {
@@ -173,7 +200,11 @@ namespace WindowsFormsApplication1
             if (c is MenuPanel)
             {
                 addMenuPanelToList(pocet, new Point(e.X, e.Y), new string[] { "polozka", "polozka2" } , "text", System.Drawing.Color.MediumSlateBlue);
-
+                pocet++;
+            }
+            if (c is LabelPanel)
+            {
+                addLabelPanelToList(pocet, new Point(e.X, e.Y), "text", System.Drawing.Color.MediumSlateBlue);
                 pocet++;
             }
         }
@@ -210,6 +241,8 @@ namespace WindowsFormsApplication1
         {
             VymazPolozkyMenu();
             addSayTextPanelTemplate(1, true, "Opakuj  ", System.Drawing.Color.Goldenrod);
+            addLabelPanelTemplate(2, true, "Koniec opakuj", System.Drawing.Color.Goldenrod);
+
         }
 
         private void button4_Click(object sender, EventArgs e) // Premenna button
