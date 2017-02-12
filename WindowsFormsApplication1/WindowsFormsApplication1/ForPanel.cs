@@ -39,27 +39,27 @@ namespace WindowsFormsApplication1
 
         private void setSettings(int panelNumber, int tabIndex)
         {
-            this.BackColor = System.Drawing.SystemColors.Info;
-            this.Location = new System.Drawing.Point(63, 33 * panelNumber);
+            this.BackColor = SystemColors.Info;
+            this.Location = new Point(63, 33 * panelNumber);
             this.Name = "forText" + panelNumber;
-            this.Size = new System.Drawing.Size(150, 32);
+            this.Size = new Size(150, 32);
             this.TabIndex = tabIndex; //toto nastavuje kolkate to bude pomocou Tabu
         }
 
         private void setTextBox(int panelNumber, int tabIndex)
         {
-            forTextBox.Location = new System.Drawing.Point(61, 10);
+            forTextBox.Location = new Point(61, 10);
             forTextBox.Name = "textBox" + panelNumber;
-            forTextBox.Size = new System.Drawing.Size(51, 32);
+            forTextBox.Size = new Size(51, 32);
             forTextBox.TabIndex = tabIndex + 2;
         }
 
         private void setLabel(int panelNumber, int tabIndex)
         {
             forLabel.AutoSize = true;
-            forLabel.Location = new System.Drawing.Point(10, 10);
+            forLabel.Location = new Point(10, 10);
             forLabel.Name = "label" + panelNumber;
-            forLabel.Size = new System.Drawing.Size(50, 32);
+            forLabel.Size = new Size(50, 32);
             forLabel.TabIndex = tabIndex + 1;
             forLabel.Text = "for ";
         }

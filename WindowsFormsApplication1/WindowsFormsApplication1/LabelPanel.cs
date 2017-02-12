@@ -14,9 +14,9 @@ namespace WindowsFormsApplication1
     {
         public Label textLabel = new Label();
         public new string Text;
-        public System.Drawing.Color Farba;
+        public Color Farba;
 
-        public LabelPanel(int panelNumber, int tabIndex, string text, System.Drawing.Color farba)
+        public LabelPanel(int panelNumber, int tabIndex, string text, Color farba)
         {
             Text = text;
             Farba = farba;
@@ -32,9 +32,9 @@ namespace WindowsFormsApplication1
         private void setSettings(int panelNumber, int tabIndex)
         {
             this.BackColor = Farba;
-            this.Location = new System.Drawing.Point(63, 100 + 33 * panelNumber);
+            this.Location = new Point(63, 100 + 33 * panelNumber);
             this.Name = "LabelPanel" + panelNumber;
-            this.Size = new System.Drawing.Size(150, 32);
+            this.Size = new Size(150, 32);
             this.TabIndex = tabIndex; //toto nastavuje kolkate to bude pomocou Tabu
         }
 
@@ -47,9 +47,9 @@ namespace WindowsFormsApplication1
         private void setLabel(int panelNumber, int tabIndex)
         {
             textLabel.AutoSize = true;
-            textLabel.Location = new System.Drawing.Point(10, 7);
+            textLabel.Location = new Point(10, 7);
             textLabel.Name = "label" + panelNumber;
-            textLabel.Size = new System.Drawing.Size(51, 32);
+            textLabel.Size = new Size(51, 32);
             textLabel.TabIndex = tabIndex + 1;
             textLabel.Text = Text;
         }

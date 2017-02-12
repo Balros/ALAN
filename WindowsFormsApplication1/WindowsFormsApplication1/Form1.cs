@@ -37,9 +37,9 @@ namespace WindowsFormsApplication1
 
         private void addForPanelTemplate(int i)
         {
-            ForPanel forPanel = CreateForPanel(i);
+            //ForPanel forPanel = CreateForPanel(i);
 
-            Controls.Add(forPanel);
+            //Controls.Add(forPanel);
         }
         private void addForPanelToList(int i, Point point)
         {
@@ -58,7 +58,7 @@ namespace WindowsFormsApplication1
             return forPanel;
         }
 
-        private void addSayTextPanelTemplate(int i, bool menu, string text, System.Drawing.Color farba)
+        private void addSayTextPanelTemplate(int i, bool menu, string text, Color farba)
         {
             
             SayTextPanel sayPanel = createSayTextPanel(i, text, farba);
@@ -69,7 +69,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private SayTextPanel createSayTextPanel(int i,string text, System.Drawing.Color farba)
+        private SayTextPanel createSayTextPanel(int i,string text, Color farba)
         {
             SayTextPanel sayPanel = new SayTextPanel(i + 1, 10 + i * 3, text, farba);
 
@@ -77,16 +77,17 @@ namespace WindowsFormsApplication1
             return sayPanel;
         }
 
-        private void addSayTextPanelToList(int pocet, Point point, string text, System.Drawing.Color farba)
+        private void addSayTextPanelToList(int pocet, Point point, string text, Color farba)
         {
             SayTextPanel sayPanel = createSayTextPanel(pocet, text, farba);
 
             sayPanel.Location = this.panel2.PointToClient(point);
 
             panel2.Controls.Add(sayPanel);
+            Color
         }
 
-        private void addMenuPanelTemplate(int i, bool menu, string[] PolozkyMenu, string text, System.Drawing.Color farba)
+        private void addMenuPanelTemplate(int i, bool menu, string[] PolozkyMenu, string text, Color farba)
         {
 
             MenuPanel menuPnl = createMenuPanel(i, PolozkyMenu, text, farba);
@@ -97,7 +98,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private MenuPanel createMenuPanel(int i, string[] PolozkyMenu, string text, System.Drawing.Color farba)
+        private MenuPanel createMenuPanel(int i, string[] PolozkyMenu, string text, Color farba)
         {
             MenuPanel menuPnl = new MenuPanel(i + 1, 10 + i * 3, PolozkyMenu, text, farba);
 
@@ -105,7 +106,7 @@ namespace WindowsFormsApplication1
             return menuPnl;
         }
 
-        private void addMenuPanelToList(int pocet, Point point, string[] PolozkyMenu, string text, System.Drawing.Color farba)
+        private void addMenuPanelToList(int pocet, Point point, string[] PolozkyMenu, string text, Color farba)
         {
             MenuPanel menuPnl = createMenuPanel(pocet, PolozkyMenu, text, farba);
 
@@ -114,7 +115,7 @@ namespace WindowsFormsApplication1
             panel2.Controls.Add(menuPnl);
         }
 
-        private void addLabelPanelTemplate(int i, bool menu, string text, System.Drawing.Color farba)
+        private void addLabelPanelTemplate(int i, bool menu, string text, Color farba)
         {
 
             LabelPanel LabelPnl = createLabelPanel(i, text, farba);
@@ -125,7 +126,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private LabelPanel createLabelPanel(int i, string text, System.Drawing.Color farba)
+        private LabelPanel createLabelPanel(int i, string text, Color farba)
         {
             LabelPanel LabelPnl = new LabelPanel(i + 1, 10 + i * 3, text, farba);
 
@@ -133,7 +134,7 @@ namespace WindowsFormsApplication1
             return LabelPnl;
         }
 
-        private void addLabelPanelToList(int pocet, Point point, string text, System.Drawing.Color farba)
+        private void addLabelPanelToList(int pocet, Point point, string text, Color farba)
         {
             LabelPanel LabelPnl = createLabelPanel(pocet, text, farba);
 
@@ -192,19 +193,19 @@ namespace WindowsFormsApplication1
             }
             if (c is SayTextPanel)
             {
-                addSayTextPanelToList(pocet, new Point(e.X, e.Y),"text", System.Drawing.Color.MediumSlateBlue );
+                addSayTextPanelToList(pocet, new Point(e.X, e.Y),"text", Color.MediumSlateBlue );
 
                 pocet++;
             }
 
             if (c is MenuPanel)
             {
-                addMenuPanelToList(pocet, new Point(e.X, e.Y), new string[] { "polozka", "polozka2" } , "text", System.Drawing.Color.MediumSlateBlue);
+                addMenuPanelToList(pocet, new Point(e.X, e.Y), new string[] { "polozka", "polozka2" } , "text", Color.MediumSlateBlue);
                 pocet++;
             }
             if (c is LabelPanel)
             {
-                addLabelPanelToList(pocet, new Point(e.X, e.Y), "text", System.Drawing.Color.MediumSlateBlue);
+                addLabelPanelToList(pocet, new Point(e.X, e.Y), "text", Color.MediumSlateBlue);
                 pocet++;
             }
         }
@@ -233,15 +234,15 @@ namespace WindowsFormsApplication1
             "dog",
             "panther",
             "tiger"
-        }, "Zahraj", System.Drawing.Color.MediumSlateBlue);
-            addSayTextPanelTemplate(1, true, "Povedz ", System.Drawing.Color.MediumSlateBlue);
+        }, "Zahraj", Color.MediumSlateBlue);
+            addSayTextPanelTemplate(1, true, "Povedz ", Color.MediumSlateBlue);
         }
 
         private void button2_Click(object sender, EventArgs e) // Ovladanie button
         {
             VymazPolozkyMenu();
-            addSayTextPanelTemplate(1, true, "Opakuj  ", System.Drawing.Color.Goldenrod);
-            addLabelPanelTemplate(2, true, "Koniec opakuj", System.Drawing.Color.Goldenrod);
+            addSayTextPanelTemplate(1, true, "Opakuj  ", Color.Goldenrod);
+            addLabelPanelTemplate(2, true, "Koniec opakuj", Color.Goldenrod);
 
         }
 
