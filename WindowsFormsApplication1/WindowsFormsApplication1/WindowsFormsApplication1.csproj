@@ -59,12 +59,26 @@
     <Compile Include="ForPanel.Designer.cs">
       <DependentUpon>ForPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="LabelPanel.cs" />
+    <Compile Include="LabelPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MenuPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepeatEndPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RepeatEndPanel.Designer.cs">
+      <DependentUpon>RepeatEndPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RepeatStartPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RepeatStartPanel.Designer.cs">
+      <DependentUpon>RepeatStartPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="SayTextPanel.cs">
       <SubType>Component</SubType>
     </Compile>

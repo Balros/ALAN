@@ -14,44 +14,50 @@ namespace WindowsFormsApplication1
     {
         public Label menuLabel = new Label();
         public ComboBox menuBox = new ComboBox();
-        public new string Text;
-        public Color Farba;
+        public string[] polozkyMenu;
+        public string text;
+        public Color farba;
 
-        public MenuPanel(int panelNumber, int tabIndex, string[] PolozkyMenu, string text, Color farba)
+        public MenuPanel(int panelNumber, int tabIndex)
         {
-            Text = text;
-            Farba = farba;
+            this.text = "Zahraj";
+            farba = Color.MediumSlateBlue;
+            polozkyMenu = new string[]
+                {
+                    "cat",
+                    "dog",
+                    "panther",
+                    "tiger"
+                };
             //InitializeComponent(); //ty to tam mas,mne to tu hadze error
             setSettings(panelNumber, tabIndex);
 
             addLabel(panelNumber, tabIndex);
-            addMenu(panelNumber, tabIndex, PolozkyMenu);
-            
-
+            addMenu(panelNumber, tabIndex, polozkyMenu);
         }
 
-        private void addMenu(int panelNumber, int tabIndex, string[] PolozkyMenu)
+        private void addMenu(int panelNumber, int tabIndex, string[] polozkyMenu)
         {
-            setMenu(panelNumber, tabIndex, PolozkyMenu);
+            setMenu(panelNumber, tabIndex, polozkyMenu);
             this.Controls.Add(menuBox);
         }
 
-        private void setMenu(int panelNumber, int tabIndex, string[] PolozkyMenu)
+        private void setMenu(int panelNumber, int tabIndex, string[] polozkyMenu)
         {
             menuBox.Location = new Point(61, 7);
             menuBox.Name = "ComboBox" + panelNumber;
             menuBox.Size = new Size(51, 32);
             menuBox.TabIndex = tabIndex + 2;
-            foreach (string polozka in PolozkyMenu)
+
+            foreach (string polozka in polozkyMenu)
             {
                 menuBox.Items.Add(polozka);
             }
-                    
         }
 
         private void setSettings(int panelNumber, int tabIndex)
         {
-            this.BackColor = Farba;
+            this.BackColor = farba;
             this.Location = new Point(63, 100 + 33 * panelNumber);
             this.Name = "MenuPanel" + panelNumber;
             this.Size = new Size(150, 32);
@@ -71,7 +77,7 @@ namespace WindowsFormsApplication1
             menuLabel.Name = "label" + panelNumber;
             menuLabel.Size = new Size(51, 32);
             menuLabel.TabIndex = tabIndex + 1;
-            menuLabel.Text = Text;
+            menuLabel.Text = text;
         }
 
         protected override void OnPaint(PaintEventArgs pe)

@@ -60,7 +60,7 @@
             this.button1.Text = "Procedúra";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ControlMouseDown);
+            this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.controlMouseDownCopy);
             // 
             // button2
             // 
@@ -117,7 +117,6 @@
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

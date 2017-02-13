@@ -14,146 +14,92 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         int pocet = 0;
-        List<Control> ZoznamPrvkovMenu = new List<Control>(); //zoznam panelov ktore su sucastou menu
+        List<Control> zoznamPrvkovMenu = new List<Control>(); //zoznam panelov ktore su sucastou menu
         public Form1()
         {
             InitializeComponent();
             panel2.AllowDrop = true;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void addControlToList(Control forPanel)
         {
-            //  for (int i = 0; i < 3; i++)
-            //{
-            //    addForPanelTemplate(i);
-            //}
-
-            //for (int i = 3; i < 6; i++)
-            //{
-            //    addSayTextPanelTemplate(i);
-            //}
-
-        }
-
-        private void addForPanelTemplate(int i)
-        {
-            //ForPanel forPanel = CreateForPanel(i);
-
-            //Controls.Add(forPanel);
-        }
-        private void addForPanelToList(int i, Point point)
-        {
-            ForPanel forPanel = CreateForPanel(i);
-
-            forPanel.Location = this.panel2.PointToClient(point);
-
             panel2.Controls.Add(forPanel);
         }
 
-        private ForPanel CreateForPanel(int i)
+        private void setLocation(Point point, Control forPanel)
         {
-            ForPanel forPanel = new ForPanel(i + 1, 10 + i * 3);
-
-            addClickEventForAll(forPanel);
-            return forPanel;
+            forPanel.Location = this.panel2.PointToClient(point);
         }
 
-        private void addSayTextPanelTemplate(int i, bool menu, string text, Color farba)
+        private void addRepeatStartPanelTemplate(int panelNumber, bool menu)
         {
-            
-            SayTextPanel sayPanel = createSayTextPanel(i, text, farba);
+
+            RepeatStartPanel repeatPanel = new RepeatStartPanel(panelNumber + 1, 10 + panelNumber * 3);
+            addClickEventForAll(repeatPanel, new MouseEventHandler(this.controlMouseDownCopy));
+            Controls.Add(repeatPanel);
+            if (menu == true)
+            {
+                zoznamPrvkovMenu.Add(repeatPanel);
+            }
+        }
+
+        private void addRepeatEndPanelTemplate(int panelNumber, bool menu)
+        {
+            RepeatEndPanel repeatPanel = new RepeatEndPanel(panelNumber + 1, 10 + panelNumber * 3);
+            addClickEventForAll(repeatPanel, new MouseEventHandler(this.controlMouseDownCopy));
+            Controls.Add(repeatPanel);
+            if (menu == true)
+            {
+                zoznamPrvkovMenu.Add(repeatPanel);
+            }
+        }
+
+        private void addSayTextPanelTemplate(int panelNumber, bool menu)
+        {
+            SayTextPanel sayPanel = new SayTextPanel(panelNumber + 1, 10 + panelNumber * 3);
+            addClickEventForAll(sayPanel, new MouseEventHandler(this.controlMouseDownCopy));
             Controls.Add(sayPanel);
             if (menu == true)
             {
-                ZoznamPrvkovMenu.Add(sayPanel);
+                zoznamPrvkovMenu.Add(sayPanel);
             }
         }
 
-        private SayTextPanel createSayTextPanel(int i,string text, Color farba)
-        {
-            SayTextPanel sayPanel = new SayTextPanel(i + 1, 10 + i * 3, text, farba);
-
-            addClickEventForAll(sayPanel);
-            return sayPanel;
-        }
-
-        private void addSayTextPanelToList(int pocet, Point point, string text, Color farba)
-        {
-            SayTextPanel sayPanel = createSayTextPanel(pocet, text, farba);
-
-            sayPanel.Location = this.panel2.PointToClient(point);
-
-            panel2.Controls.Add(sayPanel);
-            Color
-        }
-
-        private void addMenuPanelTemplate(int i, bool menu, string[] PolozkyMenu, string text, Color farba)
+        private void addMenuPanelTemplate(int panelNumber, bool menu)
         {
 
-            MenuPanel menuPnl = createMenuPanel(i, PolozkyMenu, text, farba);
-            Controls.Add(menuPnl);
+            MenuPanel menuPanel = new MenuPanel(panelNumber + 1, 10 + panelNumber * 3);
+            addClickEventForAll(menuPanel, new MouseEventHandler(this.controlMouseDownCopy));
+            Controls.Add(menuPanel);
             if (menu == true)
             {
-                ZoznamPrvkovMenu.Add(menuPnl);
+                zoznamPrvkovMenu.Add(menuPanel);
             }
         }
 
-        private MenuPanel createMenuPanel(int i, string[] PolozkyMenu, string text, Color farba)
-        {
-            MenuPanel menuPnl = new MenuPanel(i + 1, 10 + i * 3, PolozkyMenu, text, farba);
-
-            addClickEventForAll(menuPnl);
-            return menuPnl;
-        }
-
-        private void addMenuPanelToList(int pocet, Point point, string[] PolozkyMenu, string text, Color farba)
-        {
-            MenuPanel menuPnl = createMenuPanel(pocet, PolozkyMenu, text, farba);
-
-            menuPnl.Location = this.panel2.PointToClient(point);
-
-            panel2.Controls.Add(menuPnl);
-        }
-
-        private void addLabelPanelTemplate(int i, bool menu, string text, Color farba)
+        private void addLabelPanelTemplate(int panelNumber, bool menu, string text)
         {
 
-            LabelPanel LabelPnl = createLabelPanel(i, text, farba);
-            Controls.Add(LabelPnl);
+            LabelPanel labelPanel = new LabelPanel(panelNumber + 1, 10 + panelNumber * 3, text);
+            addClickEventForAll(labelPanel, new MouseEventHandler(this.controlMouseDownCopy));
+            Controls.Add(labelPanel);
             if (menu == true)
             {
-                ZoznamPrvkovMenu.Add(LabelPnl);
+                zoznamPrvkovMenu.Add(labelPanel);
             }
         }
 
-        private LabelPanel createLabelPanel(int i, string text, Color farba)
+        private void addClickEventForAll(Control inputControl, MouseEventHandler eventHandler)
         {
-            LabelPanel LabelPnl = new LabelPanel(i + 1, 10 + i * 3, text, farba);
-
-            addClickEventForAll(LabelPnl);
-            return LabelPnl;
-        }
-
-        private void addLabelPanelToList(int pocet, Point point, string text, Color farba)
-        {
-            LabelPanel LabelPnl = createLabelPanel(pocet, text, farba);
-
-            LabelPnl.Location = this.panel2.PointToClient(point);
-
-            panel2.Controls.Add(LabelPnl);
-        }
-
-        private void addClickEventForAll(Control inputControl)
-        {
-            inputControl.MouseDown += new MouseEventHandler(this.ControlMouseDown);
+            inputControl.MouseDown += eventHandler;
 
             foreach (Control control in inputControl.Controls)
             {
-                control.MouseDown += new MouseEventHandler(this.ControlMouseDown);
+                control.MouseDown += eventHandler;
             }
         }
 
-        private void ControlMouseDown(object sender, MouseEventArgs e)
+        private void controlMouseDownCopy(object sender, MouseEventArgs e)
         {
             if (sender is Button) // pridal som sem toto, lebo mi to padlo vzdy ked som klikol na nejaky button
             {
@@ -163,6 +109,20 @@ namespace WindowsFormsApplication1
             if (control != null)
             {
                 control.DoDragDrop(control, DragDropEffects.Copy);
+
+            }
+        }
+
+        private void controlMouseDownMove(object sender, MouseEventArgs e)
+        {
+            if (sender is Button) // pridal som sem toto, lebo mi to padlo vzdy ked som klikol na nejaky button
+            {
+                return;
+            }
+            Panel control = setControl(sender);
+            if (control != null)
+            {
+                control.DoDragDrop(control, DragDropEffects.Move);
 
             }
         }
@@ -185,31 +145,37 @@ namespace WindowsFormsApplication1
         private void panel2_DragDrop(object sender, DragEventArgs e)   //v tejto funkcii treba nejak ziskat pristup k sender.farba, sender.text atd. aby ked sa nieco vyplni v menu sa to zobrazilo aj v tom dropnutom elemente
         {
             Control c = e.Data.GetData(e.Data.GetFormats()[0]) as Control;
-            if (c is ForPanel)
-            {
-                addForPanelToList(pocet,new Point(e.X,e.Y));
-
-                pocet++;
-            }
+            Control newControl = null;
+            
             if (c is SayTextPanel)
             {
-                addSayTextPanelToList(pocet, new Point(e.X, e.Y),"text", Color.MediumSlateBlue );
-
-                pocet++;
+                newControl = new SayTextPanel(pocet + 1, 10 + pocet * 3);
             }
 
-            if (c is MenuPanel)
+            else if (c is MenuPanel)
             {
-                addMenuPanelToList(pocet, new Point(e.X, e.Y), new string[] { "polozka", "polozka2" } , "text", Color.MediumSlateBlue);
+                newControl = new MenuPanel(pocet + 1, 10 + pocet * 3); ;
+            }
+            else if (c is LabelPanel)
+            {
+                newControl = new LabelPanel(pocet + 1, 10 + pocet * 3, "text");
+            }
+            else if (c is RepeatStartPanel)
+            {
+                newControl = new RepeatStartPanel(pocet + 1, 10 + pocet * 3);
+            }
+            else if (c is RepeatEndPanel)
+            {
+                newControl = new RepeatEndPanel(pocet + 1, 10 + pocet * 3);
+            }
+            if (newControl != null)
+            {
+                setLocation(new Point(e.X, e.Y), newControl);
+                addControlToList(newControl);
                 pocet++;
             }
-            if (c is LabelPanel)
-            {
-                addLabelPanelToList(pocet, new Point(e.X, e.Y), "text", Color.MediumSlateBlue);
-                pocet++;
-            }
+
         }
-
 
         private void panel2_DragOver(object sender, DragEventArgs e)
         {
@@ -218,7 +184,7 @@ namespace WindowsFormsApplication1
 
         private void VymazPolozkyMenu()
         {
-            foreach (Control panel in ZoznamPrvkovMenu)
+            foreach (Control panel in zoznamPrvkovMenu)
             {
                 panel.Dispose();
             }
@@ -228,21 +194,16 @@ namespace WindowsFormsApplication1
         private void button3_Click(object sender, EventArgs e) // Zvuk button
         {
             VymazPolozkyMenu();
-            addMenuPanelTemplate(2,true,new string[]
-        {
-            "cat",
-            "dog",
-            "panther",
-            "tiger"
-        }, "Zahraj", Color.MediumSlateBlue);
-            addSayTextPanelTemplate(1, true, "Povedz ", Color.MediumSlateBlue);
+
+            addSayTextPanelTemplate(1, true);
+            addMenuPanelTemplate(2,true);
         }
 
         private void button2_Click(object sender, EventArgs e) // Ovladanie button
         {
             VymazPolozkyMenu();
-            addSayTextPanelTemplate(1, true, "Opakuj  ", Color.Goldenrod);
-            addLabelPanelTemplate(2, true, "Koniec opakuj", Color.Goldenrod);
+            addRepeatStartPanelTemplate(1, true);
+            addRepeatEndPanelTemplate(2, true);
 
         }
 

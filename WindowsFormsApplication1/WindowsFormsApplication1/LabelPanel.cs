@@ -13,25 +13,23 @@ namespace WindowsFormsApplication1
     public partial class LabelPanel : Panel
     {
         public Label textLabel = new Label();
-        public new string Text;
-        public Color Farba;
+        public string text;
+        public Color farba;
 
-        public LabelPanel(int panelNumber, int tabIndex, string text, Color farba)
+        public LabelPanel(int panelNumber, int tabIndex, string text)
         {
-            Text = text;
-            Farba = farba;
+            this.text = text;
+            farba = Color.MediumSlateBlue;
             //InitializeComponent(); //ty to tam mas,mne to tu hadze error
             setSettings(panelNumber, tabIndex);
 
             addLabel(panelNumber, tabIndex);
-
-
         }
 
 
         private void setSettings(int panelNumber, int tabIndex)
         {
-            this.BackColor = Farba;
+            this.BackColor = farba;
             this.Location = new Point(63, 100 + 33 * panelNumber);
             this.Name = "LabelPanel" + panelNumber;
             this.Size = new Size(150, 32);

@@ -10,18 +10,18 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    public partial class SayTextPanel : Panel
+    public partial class RepeatStartPanel : Panel
     {
         public Label forLabel = new Label();
         public TextBox forTextBox = new TextBox();
         public string text;
         public Color farba;
 
-        public SayTextPanel(int panelNumber, int tabIndex)
+        public RepeatStartPanel(int panelNumber, int tabIndex)
         {
             InitializeComponent();
-            text = "Povedz ";
-            farba = Color.MediumSlateBlue;
+            text = "Opakuj  ";
+            farba = Color.Goldenrod;
             setSettings(panelNumber, tabIndex);
 
             addLabel(panelNumber, tabIndex, text);
@@ -43,8 +43,8 @@ namespace WindowsFormsApplication1
         private void setSettings(int panelNumber, int tabIndex)
         {
             this.BackColor = farba;
-            this.Location = new Point(63,100 + 33 * panelNumber);
-            this.Name = "sayText" + panelNumber;
+            this.Location = new Point(63, 100 + 33 * panelNumber);
+            this.Name = "SayText" + panelNumber;
             this.Size = new Size(150, 32);
             this.TabIndex = tabIndex; //toto nastavuje kolkate to bude pomocou Tabu
         }
