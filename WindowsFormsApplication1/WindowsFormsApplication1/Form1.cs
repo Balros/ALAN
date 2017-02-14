@@ -27,68 +27,13 @@ namespace WindowsFormsApplication1
             panel2.Controls.Add(forPanel);
         }
 
-        private void setLocation(Point point, Control forPanel)
+        private void settingsForCommandTemplate(CommandControl commandPanel)
         {
-            forPanel.Location = this.panel2.PointToClient(point);
+            addClickEventForAll(commandPanel, new MouseEventHandler(this.controlMouseDownCopy));
+            Controls.Add(commandPanel);
+            zoznamPrvkovMenu.Add(commandPanel); //aby sme vedeli co mazat pri zmene ponukanych commandov
         }
-
-        private void addRepeatStartPanelTemplate(int panelNumber, bool menu)
-        {
-
-            RepeatStartPanel repeatPanel = new RepeatStartPanel(panelNumber + 1, 10 + panelNumber * 3);
-            addClickEventForAll(repeatPanel, new MouseEventHandler(this.controlMouseDownCopy));
-            Controls.Add(repeatPanel);
-            if (menu == true)
-            {
-                zoznamPrvkovMenu.Add(repeatPanel);
-            }
-        }
-
-        private void addRepeatEndPanelTemplate(int panelNumber, bool menu)
-        {
-            RepeatEndPanel repeatPanel = new RepeatEndPanel(panelNumber + 1, 10 + panelNumber * 3);
-            addClickEventForAll(repeatPanel, new MouseEventHandler(this.controlMouseDownCopy));
-            Controls.Add(repeatPanel);
-            if (menu == true)
-            {
-                zoznamPrvkovMenu.Add(repeatPanel);
-            }
-        }
-
-        private void addSayTextPanelTemplate(int panelNumber, bool menu)
-        {
-            SayTextPanel sayPanel = new SayTextPanel(panelNumber + 1, 10 + panelNumber * 3);
-            addClickEventForAll(sayPanel, new MouseEventHandler(this.controlMouseDownCopy));
-            Controls.Add(sayPanel);
-            if (menu == true)
-            {
-                zoznamPrvkovMenu.Add(sayPanel);
-            }
-        }
-
-        private void addPlaySoundPanelTemplate(int panelNumber, bool menu)
-        {
-
-            PlaySoundPanel playSoundPanel = new PlaySoundPanel(panelNumber + 1, 10 + panelNumber * 3);
-            addClickEventForAll(playSoundPanel, new MouseEventHandler(this.controlMouseDownCopy));
-            Controls.Add(playSoundPanel);
-            if (menu == true)
-            {
-                zoznamPrvkovMenu.Add(playSoundPanel);
-            }
-        }
-
-        private void addLabelPanelTemplate(int panelNumber, bool menu, string text)
-        {
-            LabelPanel labelPanel = new LabelPanel(panelNumber + 1, 10 + panelNumber * 3, text);
-            addClickEventForAll(labelPanel, new MouseEventHandler(this.controlMouseDownCopy));
-            Controls.Add(labelPanel);
-            if (menu == true)
-            {
-                zoznamPrvkovMenu.Add(labelPanel);
-            }
-        }
-
+        
         private void addClickEventForAll(Control inputControl, MouseEventHandler eventHandler)
         {
             inputControl.MouseDown += eventHandler;
@@ -109,7 +54,6 @@ namespace WindowsFormsApplication1
             if (control != null)
             {
                 control.DoDragDrop(control, DragDropEffects.Copy);
-
             }
         }
 
@@ -141,7 +85,6 @@ namespace WindowsFormsApplication1
             {
                 createCopyOfDraggedControl(e, c);
             }
-
         }
 
         private void createCopyOfDraggedControl(DragEventArgs e, Control c)
@@ -171,7 +114,7 @@ namespace WindowsFormsApplication1
             if (newControl != null)
             {
                 newControl.MouseDown += new MouseEventHandler(c_MouseDown);
-                setLocation(new Point(e.X, e.Y), newControl);
+                newControl.Location = this.panel2.PointToClient(new Point(e.X, e.Y));
                 addControlToList(newControl);
                 pocet++;
             }
@@ -206,18 +149,33 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e) // Zvuk button
         {
+            List<CommandControl> templates = new List<CommandControl>();
+
             VymazPolozkyMenu();
 
-            addSayTextPanelTemplate(1, true);
-            addPlaySoundPanelTemplate(2,true);
+            templates.Add(new SayTextPanel(templates.Count + 1, 10 + templates.Count * 3));
+            templates.Add(new PlaySoundPanel(templates.Count + 1, 10 + templates.Count * 3));
+            //templates.Add(new LabelPanel(templates.Count + 1, 10 + templates.Count * 3, text));
+
+            foreach (CommandControl command in templates)
+            {
+                settingsForCommandTemplate(command);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e) // Ovladanie button
         {
-            VymazPolozkyMenu();
-            addRepeatStartPanelTemplate(1, true);
-            addRepeatEndPanelTemplate(2, true);
+            List<CommandControl> templates = new List<CommandControl>();
 
+            VymazPolozkyMenu();
+
+            templates.Add(new RepeatStartPanel(templates.Count + 1, 10 + templates.Count * 3));
+            templates.Add(new RepeatEndPanel(templates.Count + 1, 10 + templates.Count * 3));
+
+            foreach (CommandControl command in templates)
+            {
+                settingsForCommandTemplate(command);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e) // Premenna button
