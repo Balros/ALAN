@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1
 
         protected virtual void setSettings(int panelNumber, int tabIndex)
         {
-            this.Location = new Point(63, 100 + 33 * panelNumber);
+            this.Location = new Point(63, 100 + 33 * (panelNumber + 1));
             this.Size = new Size(150, 32);
             this.TabIndex = tabIndex; //toto nastavuje kolkate to bude pomocou Tabu
         }

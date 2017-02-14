@@ -95,24 +95,24 @@ namespace WindowsFormsApplication1
             Control newControl = null;
             if (c is SayTextPanel)
             {
-                newControl = new SayTextPanel(pocet + 1, 10 + pocet * 3);
+                newControl = new SayTextPanel(pocet, 10 + pocet * 3);
             }
 
             else if (c is PlaySoundPanel)
             {
-                newControl = new PlaySoundPanel(pocet + 1, 10 + pocet * 3); ;
+                newControl = new PlaySoundPanel(pocet, 10 + pocet * 3); ;
             }
             else if (c is LabelPanel)
             {
-                newControl = new LabelPanel(pocet + 1, 10 + pocet * 3, "text");
+                newControl = new LabelPanel(pocet, 10 + pocet * 3, "text");
             }
             else if (c is RepeatStartPanel)
             {
-                newControl = new RepeatStartPanel(pocet + 1, 10 + pocet * 3);
+                newControl = new RepeatStartPanel(pocet, 10 + pocet * 3);
             }
             else if (c is RepeatEndPanel)
             {
-                newControl = new RepeatEndPanel(pocet + 1, 10 + pocet * 3);
+                newControl = new RepeatEndPanel(pocet, 10 + pocet * 3);
             }
             if (newControl != null)
             {
@@ -162,8 +162,8 @@ namespace WindowsFormsApplication1
 
             vymazPolozkyMenu();
 
-            templates.Add(new SayTextPanel(templates.Count + 1, 10 + templates.Count * 3));
-            templates.Add(new PlaySoundPanel(templates.Count + 1, 10 + templates.Count * 3));
+            templates.Add(new SayTextPanel(templates.Count, 10 + templates.Count * 3));
+            templates.Add(new PlaySoundPanel(templates.Count, 10 + templates.Count * 3));
             //templates.Add(new LabelPanel(templates.Count + 1, 10 + templates.Count * 3, text));
 
             pridajPolozkyMenu(templates);
@@ -183,8 +183,8 @@ namespace WindowsFormsApplication1
 
             vymazPolozkyMenu();
 
-            templates.Add(new RepeatStartPanel(templates.Count + 1, 10 + templates.Count * 3));
-            templates.Add(new RepeatEndPanel(templates.Count + 1, 10 + templates.Count * 3));
+            templates.Add(new RepeatStartPanel(templates.Count, 10 + templates.Count * 3));
+            templates.Add(new RepeatEndPanel(templates.Count, 10 + templates.Count * 3));
 
             pridajPolozkyMenu(templates);
         }
