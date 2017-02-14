@@ -50,23 +50,26 @@ namespace WindowsFormsApplication1
             //{
             //    return;
             //}
-            Panel control = selectUpperParent(sender);
-            if (control != null)
+            if (sender is Control)
             {
-                control.DoDragDrop(control, DragDropEffects.Copy);
+                CommandControl control = selectClosestCommandParent((Control)sender);
+                if (control != null)
+                {
+                    control.DoDragDrop(control, DragDropEffects.Copy);
+                }
             }
         }
 
-        private Panel selectUpperParent(object sender)
+        private CommandControl selectClosestCommandParent(Control sender)
         {
-            Panel result = null;
-            if (sender is Panel)
+            CommandControl result = null;
+            if (sender is CommandControl)
             {
-                result = (Panel)sender;
+                result = (CommandControl)sender;
             }
-            else if (sender is Control)
+            else if (sender.Parent != null)
             {
-                result = (Panel)((Control)sender).Parent;
+                result  = selectClosestCommandParent(sender.Parent);
             }
 
             return result;
@@ -113,7 +116,7 @@ namespace WindowsFormsApplication1
             }
             if (newControl != null)
             {
-                newControl.MouseDown += new MouseEventHandler(c_MouseDown);
+                addClickEventForAll(newControl, c_MouseDown);
                 newControl.Location = this.panel2.PointToClient(new Point(e.X, e.Y));
                 addControlToList(newControl);
                 pocet++;
@@ -123,8 +126,14 @@ namespace WindowsFormsApplication1
         private void c_MouseDown(object sender, MouseEventArgs e)
         {
             move = true;
-            Control c = sender as Control;
-            c.DoDragDrop(c, DragDropEffects.Move);
+            if (sender is Control)
+            {
+                CommandControl control = selectClosestCommandParent((Control)sender);
+                if (control != null)
+                {
+                    control.DoDragDrop(control, DragDropEffects.Move);
+                }
+            }
         }
 
         private void panel2_DragOver(object sender, DragEventArgs e)
