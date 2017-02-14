@@ -148,7 +148,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void VymazPolozkyMenu()
+        private void vymazPolozkyMenu()
         {
             foreach (Control panel in zoznamPrvkovMenu)
             {
@@ -160,12 +160,17 @@ namespace WindowsFormsApplication1
         {
             List<CommandControl> templates = new List<CommandControl>();
 
-            VymazPolozkyMenu();
+            vymazPolozkyMenu();
 
             templates.Add(new SayTextPanel(templates.Count + 1, 10 + templates.Count * 3));
             templates.Add(new PlaySoundPanel(templates.Count + 1, 10 + templates.Count * 3));
             //templates.Add(new LabelPanel(templates.Count + 1, 10 + templates.Count * 3, text));
 
+            pridajPolozkyMenu(templates);
+        }
+
+        private void pridajPolozkyMenu(List<CommandControl> templates)
+        {
             foreach (CommandControl command in templates)
             {
                 settingsForCommandTemplate(command);
@@ -176,15 +181,12 @@ namespace WindowsFormsApplication1
         {
             List<CommandControl> templates = new List<CommandControl>();
 
-            VymazPolozkyMenu();
+            vymazPolozkyMenu();
 
             templates.Add(new RepeatStartPanel(templates.Count + 1, 10 + templates.Count * 3));
             templates.Add(new RepeatEndPanel(templates.Count + 1, 10 + templates.Count * 3));
 
-            foreach (CommandControl command in templates)
-            {
-                settingsForCommandTemplate(command);
-            }
+            pridajPolozkyMenu(templates);
         }
 
         private void button4_Click(object sender, EventArgs e) // Premenna button
