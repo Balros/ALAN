@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class ForPanel
+    partial class PlaySoundPanel
     {
         /// <summary>
         /// Required designer variable.

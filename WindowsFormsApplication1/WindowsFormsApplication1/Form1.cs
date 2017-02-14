@@ -14,6 +14,7 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         int pocet = 0;
+        bool move = false;
         List<Control> zoznamPrvkovMenu = new List<Control>(); //zoznam panelov ktore su sucastou menu
         public Form1()
         {
@@ -65,21 +66,20 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void addMenuPanelTemplate(int panelNumber, bool menu)
+        private void addPlaySoundPanelTemplate(int panelNumber, bool menu)
         {
 
-            MenuPanel menuPanel = new MenuPanel(panelNumber + 1, 10 + panelNumber * 3);
-            addClickEventForAll(menuPanel, new MouseEventHandler(this.controlMouseDownCopy));
-            Controls.Add(menuPanel);
+            PlaySoundPanel playSoundPanel = new PlaySoundPanel(panelNumber + 1, 10 + panelNumber * 3);
+            addClickEventForAll(playSoundPanel, new MouseEventHandler(this.controlMouseDownCopy));
+            Controls.Add(playSoundPanel);
             if (menu == true)
             {
-                zoznamPrvkovMenu.Add(menuPanel);
+                zoznamPrvkovMenu.Add(playSoundPanel);
             }
         }
 
         private void addLabelPanelTemplate(int panelNumber, bool menu, string text)
         {
-
             LabelPanel labelPanel = new LabelPanel(panelNumber + 1, 10 + panelNumber * 3, text);
             addClickEventForAll(labelPanel, new MouseEventHandler(this.controlMouseDownCopy));
             Controls.Add(labelPanel);
@@ -101,11 +101,11 @@ namespace WindowsFormsApplication1
 
         private void controlMouseDownCopy(object sender, MouseEventArgs e)
         {
-            if (sender is Button) // pridal som sem toto, lebo mi to padlo vzdy ked som klikol na nejaky button
-            {
-                return;
-            }
-            Panel control = setControl(sender);
+            //if (sender is Button) // pridal som sem toto, lebo mi to padlo vzdy ked som klikol na nejaky button
+            //{
+            //    return;
+            //}
+            Panel control = selectUpperParent(sender);
             if (control != null)
             {
                 control.DoDragDrop(control, DragDropEffects.Copy);
@@ -113,21 +113,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void controlMouseDownMove(object sender, MouseEventArgs e)
-        {
-            if (sender is Button) // pridal som sem toto, lebo mi to padlo vzdy ked som klikol na nejaky button
-            {
-                return;
-            }
-            Panel control = setControl(sender);
-            if (control != null)
-            {
-                control.DoDragDrop(control, DragDropEffects.Move);
-
-            }
-        }
-
-        private Panel setControl(object sender)
+        private Panel selectUpperParent(object sender)
         {
             Panel result = null;
             if (sender is Panel)
@@ -145,16 +131,30 @@ namespace WindowsFormsApplication1
         private void panel2_DragDrop(object sender, DragEventArgs e)   //v tejto funkcii treba nejak ziskat pristup k sender.farba, sender.text atd. aby ked sa nieco vyplni v menu sa to zobrazilo aj v tom dropnutom elemente
         {
             Control c = e.Data.GetData(e.Data.GetFormats()[0]) as Control;
-            Control newControl = null;
             
+            if (move)
+            {
+                c.Location = this.panel2.PointToClient(new Point(e.X, e.Y));
+                move = false;
+            }
+            else
+            {
+                createCopyOfDraggedControl(e, c);
+            }
+
+        }
+
+        private void createCopyOfDraggedControl(DragEventArgs e, Control c)
+        {
+            Control newControl = null;
             if (c is SayTextPanel)
             {
                 newControl = new SayTextPanel(pocet + 1, 10 + pocet * 3);
             }
 
-            else if (c is MenuPanel)
+            else if (c is PlaySoundPanel)
             {
-                newControl = new MenuPanel(pocet + 1, 10 + pocet * 3); ;
+                newControl = new PlaySoundPanel(pocet + 1, 10 + pocet * 3); ;
             }
             else if (c is LabelPanel)
             {
@@ -170,16 +170,30 @@ namespace WindowsFormsApplication1
             }
             if (newControl != null)
             {
+                newControl.MouseDown += new MouseEventHandler(c_MouseDown);
                 setLocation(new Point(e.X, e.Y), newControl);
                 addControlToList(newControl);
                 pocet++;
             }
+        }
 
+        private void c_MouseDown(object sender, MouseEventArgs e)
+        {
+            move = true;
+            Control c = sender as Control;
+            c.DoDragDrop(c, DragDropEffects.Move);
         }
 
         private void panel2_DragOver(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Copy;
+            if (move)
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
         }
 
         private void VymazPolozkyMenu()
@@ -188,7 +202,6 @@ namespace WindowsFormsApplication1
             {
                 panel.Dispose();
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e) // Zvuk button
@@ -196,7 +209,7 @@ namespace WindowsFormsApplication1
             VymazPolozkyMenu();
 
             addSayTextPanelTemplate(1, true);
-            addMenuPanelTemplate(2,true);
+            addPlaySoundPanelTemplate(2,true);
         }
 
         private void button2_Click(object sender, EventArgs e) // Ovladanie button
