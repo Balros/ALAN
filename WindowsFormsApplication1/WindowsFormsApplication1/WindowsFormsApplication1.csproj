@@ -67,6 +67,12 @@
     <Compile Include="Commands\PlaySoundControll.Designer.cs">
       <DependentUpon>PlaySoundControll.cs</DependentUpon>
     </Compile>
+    <Compile Include="Commands\ParentOfAnotherCommands.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\ParentOfAnotherCommands.Designer.cs">
+      <DependentUpon>ParentOfAnotherCommands.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\RepeatEndPanel.cs">

@@ -89,6 +89,25 @@ namespace WindowsFormsApplication1
                 createCopyOfDraggedControl(e, c);
             }
         }
+        private void ParentOfAnotherCommads_DragDrop(object sender, DragEventArgs e)   //v tejto funkcii treba nejak ziskat pristup k sender.farba, sender.text atd. aby ked sa nieco vyplni v menu sa to zobrazilo aj v tom dropnutom elemente
+        {
+            Control c = e.Data.GetData(e.Data.GetFormats()[0]) as Control;
+            if (c is CommandControl)
+            {
+                if (move)
+                {
+                    ParentOfAnotherCommands parent = sender as ParentOfAnotherCommands;
+                    int numberOfCommands = parent.Controls.Count - 1;
+
+                    parent.addSubcommand((CommandControl)c);
+                    move = false;
+                }
+                else
+                {
+                    createCopyOfDraggedControl(e, c);
+                }
+            }
+        }
 
         private void createCopyOfDraggedControl(DragEventArgs e, Control c)
         {
@@ -116,6 +135,12 @@ namespace WindowsFormsApplication1
             }
             if (newControl != null)
             {
+                if (newControl is ParentOfAnotherCommands)
+                {
+                    newControl.AllowDrop = true;
+                    newControl.DragDrop += new DragEventHandler(this.ParentOfAnotherCommads_DragDrop);
+                    newControl.DragOver += new DragEventHandler(this.panel2_DragOver);
+                }
                 addClickEventForAll(newControl, c_MouseDown);
                 newControl.Location = this.panel2.PointToClient(new Point(e.X, e.Y));
                 addControlToList(newControl);

@@ -39,7 +39,7 @@ namespace WindowsFormsApplication1
         }
         private void setName(int panelNumber)
         {
-            this.Name = "psayTextPanel" + panelNumber;
+            this.Name = "sayTextPanel" + panelNumber;
         }
     }
 }

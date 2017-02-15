@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    public partial class RepeatStartPanel : CommandControl
+    public partial class RepeatStartPanel : ParentOfAnotherCommands
     {
         public TextBox forTextBox = new TextBox();
 
